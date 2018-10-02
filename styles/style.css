@@ -1,0 +1,21 @@
+.scoreboard {
+    background-color: aquamarine;
+}
+
+.square {
+    height: 70px;
+    width: 70px;
+    background-color: blue;
+    margin: 1px
+    
+}
+
+.game {
+    margin: 20px;
+
+}
+
+#helicopter {
+    background-image: url('https://image.freepik.com/free-icon/helicopter-facing-right_318-97883.jpg');
+
+}

@@ -16,11 +16,15 @@ As a player I want to be able to click the mouse and have the helicopter move up
    - During game play the mouse will controle the up and down movements of a helicopter.
    - The helicopter will need to avoid moving obsticles.
    - Obsticles will include the floor, celing and moving targets coming from the top and bottom. 
-   - Make the speed of the game increase as time increases.
-   - Make the amount of obsticles increas as time increases.
    - Make the game end if an obsticle is hit by the helicopter.
    - Make the game restart if the player want's to.
    - If the time that the player made it in the game is higer than the previous time update high score.
+   
+    Nice-to-haves
+- Make the speed of the game increase as time increases.
+- Make the amount of obsticles increas as time increases.
+
+
     
     
     
@@ -34,4 +38,4 @@ As a player I want to be able to click the mouse and have the helicopter move up
     
     
     Wire Frame
-https://wireframepro.mockflow.com/editor.jsp?editor=on&publicid=M154cf5ebd8d25beb5679e88749ac6d0a1538154120471&perm=Create&projectid=M3cea04fa71b47a3ba73fad2e43e76bf21538154157596&ptitle=Helicopter-Game&bgcolor=white&category=sketchui#/page/a03a3dd6241649729cb63ff61ef7acae
+https://docs.google.com/document/d/1I56-q7SNvVyqHybwEDL1Il_kf1NyNfPRQO8OcTfGUfo/edit?usp=sharing
