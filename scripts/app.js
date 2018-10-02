@@ -1,21 +1,12 @@
 let milliseconds = 0;
 let seconds = 0; 
 let minutes = 0;
-let time = null;
+let time = null; // use this variable to keep track of high score
 
-// generate game timer
 // make timer keep track of longest running time before
 // helicopter colides with obsticle
 
 
-
-
-// make game board
-
-
-// const obsticals = {
-
-// create randomly generated obsticals
 // obsticals will move across the screen from
 // right to left
 
@@ -25,6 +16,32 @@ const helicopter = {
     X: 3,
     Y: 4,   
 } 
+
+
+class obstacles  {
+    constructor(){
+        this.X = 15;
+        this.Y = Math.floor(Math.random() * 7);
+    }
+   generate(){
+    $(`.square-${this.X}-${this.Y}`).attr('id', 'newObstacle')
+
+   } 
+   moveLeft(){
+    setInterval(() => {   
+    const currentSquare = $('#newObstacle');   
+    while(currentSquare.X > 1){
+        console.log(currentSquare)
+        // currentSquare.removeAttr('id');
+        // currentSquare.X--;
+        // $(`.square-${currentSquare.X}-${currentSquare.Y}`).attr('id', 'newObstacle')
+    }
+
+        }, 1000);
+    } 
+
+}
+
 
 for(let x = 1; x < 16; x++){
     $('.game').append(`<div class='game-column game-column-${x}'></div>`)
@@ -76,9 +93,16 @@ $('.startGame').on('click', () => {
         }
         $('.timer').text(`Timer:  ${minutes}:${seconds}`);
     },1000);
+    newObstacle();
+    
     
 })
 
-
-
-
+const newObstacle = () => {
+ let rand = Math.round(Math.random() * 2000)
+ setInterval( () => {
+    let newObstacle = new obstacles;
+    newObstacle.generate();
+    newObstacle.moveLeft();
+ }, rand)
+}
