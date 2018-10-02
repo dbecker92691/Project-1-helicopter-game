@@ -14,30 +14,32 @@ let time = null; // use this variable to keep track of high score
 
 const helicopter = {
     X: 3,
-    Y: 4,   
+    Y: 4,
+    isAlive: true,
 } 
 
+const allObstacles = [];
 
 class obstacles  {
     constructor(){
         this.X = 15;
         this.Y = Math.floor(Math.random() * 7);
+        allObstacles.push(this);
     }
    generate(){
-    $(`.square-${this.X}-${this.Y}`).attr('id', 'newObstacle')
+    $(`.square-${this.X}-${this.Y}`).addClass('obstacle')
 
    } 
    moveLeft(){
-    setInterval(() => {   
-    const currentSquare = $('#newObstacle');   
-    while(currentSquare.X > 1){
-        console.log(currentSquare)
-        // currentSquare.removeAttr('id');
-        // currentSquare.X--;
-        // $(`.square-${currentSquare.X}-${currentSquare.Y}`).attr('id', 'newObstacle')
+    if(this.X > 1) {
+        console.log('moving')
+        let currentSquare = $(`.square-${this.X}-${this.Y}`)
+        currentSquare.removeClass('obstacle');
+        this.X--;
+        $(`.square-${this.X}-${this.Y}`).addClass('obstacle')
+        console.log(this.X);
+        console.log(this.Y);
     }
-
-        }, 1000);
     } 
 
 }
@@ -85,24 +87,39 @@ $('body').keydown((e)=>{
     }
 })
 
+
+
 $('.startGame').on('click', () => {
     setInterval(()=>{
         seconds++;
+        if(seconds % 2 === 0){
+            let newObstacle = new obstacles();
+        }
+        moveObsticles();
         if(seconds % 60 === 0){
             minutes++;
         }
         $('.timer').text(`Timer:  ${minutes}:${seconds}`);
     },1000);
-    newObstacle();
+
     
     
 })
 
-const newObstacle = () => {
- let rand = Math.round(Math.random() * 2000)
- setInterval( () => {
-    let newObstacle = new obstacles;
-    newObstacle.generate();
-    newObstacle.moveLeft();
- }, rand)
-}
+const moveObsticles = () => {
+    for(let i = 0; i < allObstacles.length; i++){
+        allObstacles[i].moveLeft();
+    }
+   }
+
+
+// const gameOver= () => {
+//     if($('.square').attr('id', 'helicopter') && $('.square').attr('id', 'newObstacle')){
+//         helicopter.isAlive === false;
+//         $('.highscore').append('')
+//         clearInterval(gameTimer);
+//         $('.game').append("<h1 class='gameOver'>Game Over</h1>");
+//         // switch START button to Play Again button
+//         // 
+//     }
+// }

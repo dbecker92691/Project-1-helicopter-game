@@ -17,9 +17,19 @@
 
 #helicopter {
     background-image: url('https://image.freepik.com/free-icon/helicopter-facing-right_318-97883.jpg');
+    background-size: 100%; 
 
 }
 
-#newObstacle {
+.obstacle {
     background-color: greenyellow;
+}
+
+.timer {
+position: relative;
+left: -400px;
+}
+
+.playagain {
+    justify-content: center;
 }
