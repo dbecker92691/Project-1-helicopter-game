@@ -1,4 +1,7 @@
-let time = 0;
+let milliseconds = 0;
+let seconds = 0; 
+let minutes = 0;
+let time = null;
 
 // generate game timer
 // make timer keep track of longest running time before
@@ -40,17 +43,21 @@ $('.square-3-4').attr('id', 'helicopter');
 
 
 const moveUp = () => {
+    if(helicopter.Y <= 6){
         const currentSquare = $('#helicopter');
         currentSquare.removeAttr('id');
         helicopter.Y++;
-        console.log(helicopter)
         $(`.square-3-${helicopter.Y}`).attr('id', 'helicopter');
+    }
 }
 const moveDown = () => {
+    if(helicopter.Y >= 2) {
         const currentSquare = $('#helicopter');
         currentSquare.removeAttr('id');
         helicopter.Y--;
         $(`.square-3-${helicopter.Y}`).attr('id', 'helicopter');
+    }
+
 }
 
 $('body').keydown((e)=>{
@@ -60,3 +67,18 @@ $('body').keydown((e)=>{
         moveDown()
     }
 })
+
+$('.startGame').on('click', () => {
+    setInterval(()=>{
+        seconds++;
+        if(seconds % 60 === 0){
+            minutes++;
+        }
+        $('.timer').text(`Timer:  ${minutes}:${seconds}`);
+    },1000);
+    
+})
+
+
+
+
