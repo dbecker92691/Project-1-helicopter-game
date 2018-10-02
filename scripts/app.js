@@ -42,14 +42,15 @@ $('.square-3-4').attr('id', 'helicopter');
 const moveUp = () => {
         const currentSquare = $('#helicopter');
         currentSquare.removeAttr('id');
-        helicopter.y++;
-        $(`.square-3-${helicopter.y}`).attr('id', 'helicopter');
+        helicopter.Y++;
+        console.log(helicopter)
+        $(`.square-3-${helicopter.Y}`).attr('id', 'helicopter');
 }
 const moveDown = () => {
         const currentSquare = $('#helicopter');
         currentSquare.removeAttr('id');
-        helicopter.y--;
-        $(`.square-3-${helicopter.y}`).attr('id', 'helicopter');
+        helicopter.Y--;
+        $(`.square-3-${helicopter.Y}`).attr('id', 'helicopter');
 }
 
 $('body').keydown((e)=>{
