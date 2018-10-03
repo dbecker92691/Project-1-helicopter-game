@@ -1,7 +1,8 @@
 let milliseconds = 0;
 let seconds = 0; 
 let minutes = 0;
-let time = null; // use this variable to keep track of high score
+let time = null; 
+// use this variable to keep track of high score
 
 // make timer keep track of longest running time before
 // helicopter colides with obsticle
@@ -31,7 +32,7 @@ class obstacles  {
 
    } 
    moveLeft(){
-    if(this.X > 1) {
+    if(this.X >= 0) {
         console.log('moving')
         let currentSquare = $(`.square-${this.X}-${this.Y}`)
         currentSquare.removeClass('obstacle');
@@ -40,7 +41,13 @@ class obstacles  {
         console.log(this.X);
         console.log(this.Y);
     }
-    } 
+    }
+    collision(){
+        const collision = $(`.square-${this.X}-${this.Y}`)
+        if(collision.hasClass('obstacle') && collision.attr('id', 'helicopter')){
+            gameOver();
+        }
+    }
 
 }
 
@@ -87,9 +94,7 @@ $('body').keydown((e)=>{
     }
 })
 
-
-
-$('.startGame').on('click', () => {
+const gameTimer = () => {
     setInterval(()=>{
         seconds++;
         if(seconds % 2 === 0){
@@ -101,9 +106,12 @@ $('.startGame').on('click', () => {
         }
         $('.timer').text(`Timer:  ${minutes}:${seconds}`);
     },1000);
+    
+}
 
-    
-    
+$('.startGame').on('click', () => {
+gameTimer();
+   
 })
 
 const moveObsticles = () => {
@@ -113,13 +121,11 @@ const moveObsticles = () => {
    }
 
 
-// const gameOver= () => {
-//     if($('.square').attr('id', 'helicopter') && $('.square').attr('id', 'newObstacle')){
-//         helicopter.isAlive === false;
-//         $('.highscore').append('')
-//         clearInterval(gameTimer);
-//         $('.game').append("<h1 class='gameOver'>Game Over</h1>");
-//         // switch START button to Play Again button
-//         // 
-//     }
-// }
+const gameOver= () => {
+        helicopter.isAlive === false;
+        $('.highscore').append('')
+        clearInterval(gameTimer);
+        $('.game').append("<h1 class='gameOver'>Game Over</h1>");
+        // switch START button to Play Again button
+        // 
+}
