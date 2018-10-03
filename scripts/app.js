@@ -1,5 +1,5 @@
-let seconds = 0; 
-let minutes = 0;
+let seconds = 00; 
+let minutes = 00;
 $('.playagain').hide();
 // make timer keep track of longest running time before
 
@@ -7,7 +7,12 @@ $('.playagain').hide();
 const helicopter = {
     X: 3,
     Y: 4,
-
+    lives: 3,
+    helicopterDown(){
+        if(this.lives === 0){
+            gameOver();
+        }
+    }
 
 } 
 
@@ -34,8 +39,9 @@ class Obstacle  {
     collision(){
         let currentSquare = $(`.square-${this.X}-${this.Y}`)
         if(currentSquare.hasClass('obstacle') && currentSquare.hasClass('helicopter')){
-            helicopter.isAlive === false;
-            gameOver();
+            helicopter.lives --;
+            helicopter.helicopterDown();
+            $('.lives').text(`Lives: ${helicopter.lives}`)
         }
     }
 
@@ -55,6 +61,7 @@ for(let x = 1; x < 16; x++){
 
 $('.square-3-4').addClass('helicopter');
 $('.helicopter').hide();
+$('.lives').text(`Lives: ${helicopter.lives}`)
 
 
 
@@ -64,7 +71,7 @@ const moveUp = () => {
         const currentSquare = $('.helicopter');
         currentSquare.removeClass('helicopter');
         helicopter.Y++;
-        $(`.square-3-${helicopter.Y}`).addClass('helicopter');
+        $(`.square-${helicopter.X}-${helicopter.Y}`).addClass('helicopter');
     }
 }
 const moveDown = () => {
@@ -72,7 +79,27 @@ const moveDown = () => {
         const currentSquare = $('.helicopter');
         currentSquare.removeClass('helicopter');
         helicopter.Y--;
-        $(`.square-3-${helicopter.Y}`).addClass('helicopter');
+        $(`.square-${helicopter.X}-${helicopter.Y}`).addClass('helicopter');
+    }
+
+}
+
+const moveRight = () => {
+    if(helicopter.X <= 14) {
+        const currentSquare = $('.helicopter');
+        currentSquare.removeClass('helicopter');
+        helicopter.X++;
+        $(`.square-${helicopter.X}-${helicopter.Y}`).addClass('helicopter');
+    }
+
+}
+
+const moveLeft = () => {
+    if(helicopter.X >= 2) {
+        const currentSquare = $('.helicopter');
+        currentSquare.removeClass('helicopter');
+        helicopter.X--;
+        $(`.square-${helicopter.X}-${helicopter.Y}`).addClass('helicopter');
     }
 
 }
@@ -81,10 +108,14 @@ $('body').keydown((e)=> {
     if(e.which == 38){
         moveUp();
     }else if(e.which == 40){
-        moveDown()
+        moveDown();
+    } else if(e.which == 39){
+        moveRight();
+    } else if(e.which == 37){
+        moveLeft();
     }
-})
 
+})
 const gameTimer = () => {
     gameTime = setInterval(()=>{
         seconds++;
@@ -95,11 +126,29 @@ const gameTimer = () => {
         detectCollision();
         if(seconds % 60 === 0){
             minutes++;
-        }
+            seconds = 00;
+         } if(seconds % 30 === 0){
+            levelUp();
+         }  
         $('.timer').text(`Timer:  ${minutes}:${seconds}`);
     },1000);
+
     
 }
+
+const levelUp = () => {
+    if(helicopter.lives > 0){
+        let int = 1000
+        levelUpTimer = setInterval(()=>{
+            if(seconds % 1 === 0){
+                let newObstacle = new Obstacle();
+            }
+            moveObsticles();
+            detectCollision();
+        }, int - 20)
+    }
+}
+
 
 $('.startGame').on('click', () => {
 $('.startGame').hide();
@@ -124,16 +173,20 @@ const moveObsticles = () => {
 
 
 const gameOver = () => {
+    // if you die before 30 seconds the 
+    // levelUpTimer is not called so it
+    // gets an error
         $('.highscore').append(gameTime)
         clearInterval(gameTime);
+        clearInterval(levelUpTimer)
         $('.playagain').show();
         $(`.square`).removeClass('obstacle');
         $(`.square`).removeClass('helicopter');
         $('.game').append("<h1 class='gameOver'>Game Over</h1>");
+
  }
 
 
 $('.playagain').on('click', () => {
     location.reload(true);
 })
-
