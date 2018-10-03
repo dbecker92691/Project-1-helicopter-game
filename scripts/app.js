@@ -13,7 +13,7 @@ const helicopter = {
 
 const allObstacles = [];
 
-class obstacles  {
+class Obstacle  {
     constructor(){
         this.X = 15;
         this.Y = Math.floor(Math.random() * 7);
@@ -54,7 +54,7 @@ for(let x = 1; x < 16; x++){
 } 
 
 $('.square-3-4').addClass('helicopter');
-
+$('.helicopter').hide();
 
 
 
@@ -77,7 +77,7 @@ const moveDown = () => {
 
 }
 
-$('body').keydown((e)=>{
+$('body').keydown((e)=> {
     if(e.which == 38){
         moveUp();
     }else if(e.which == 40){
@@ -89,7 +89,7 @@ const gameTimer = () => {
     gameTime = setInterval(()=>{
         seconds++;
         if(seconds % 2 === 0){
-            let newObstacle = new obstacles();
+            let newObstacle = new Obstacle();
         }
         moveObsticles();
         detectCollision();
@@ -103,16 +103,17 @@ const gameTimer = () => {
 
 $('.startGame').on('click', () => {
 $('.startGame').hide();
+$('.helicopter').show();
 gameTimer();
-   
-
+})
 
 
 const moveObsticles = () => {
     for(let i = 0; i < allObstacles.length; i++){
         allObstacles[i].moveLeft();
     }
-   }
+ }
+
 
  const detectCollision = () => {
      for(let i = 0; i < allObstacles.length; i++){
@@ -121,13 +122,18 @@ const moveObsticles = () => {
  }  
 
 
+
 const gameOver = () => {
-        //$('.highscore').append('')
+        $('.highscore').append(gameTime)
         clearInterval(gameTime);
         $('.playagain').show();
         $(`.square`).removeClass('obstacle');
         $(`.square`).removeClass('helicopter');
         $('.game').append("<h1 class='gameOver'>Game Over</h1>");
-        // switch START button to Play Again button
-        // 
-}
+ }
+
+
+$('.playagain').on('click', () => {
+    location.reload(true);
+})
+
