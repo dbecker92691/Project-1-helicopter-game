@@ -16,7 +16,7 @@
     margin-bottom: 50px;
 }
 
-#helicopter {
+.helicopter {
     background-image: url('http://www.animatedimages.org/data/media/72/animated-helicopter-image-0037.gif');
     background-size: 100%; 
     background-repeat: no-repeat;
@@ -40,4 +40,8 @@ left: -400px;
 
 .gamebuttons {
     margin-left: 500px;
+}
+
+.gameOver {
+    justify-content: center;
 }
