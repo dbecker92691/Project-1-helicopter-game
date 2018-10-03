@@ -1,7 +1,6 @@
 let seconds = 00; 
 let minutes = 00;
 $('.playagain').hide();
-// make timer keep track of longest running time before
 
 
 const helicopter = {
