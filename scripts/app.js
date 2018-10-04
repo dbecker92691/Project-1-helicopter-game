@@ -2,6 +2,12 @@ let seconds = 00;
 let minutes = 00;
 $('.playagain').hide();
 
+$('.how-to-play').on('click', () =>{
+    $('.modal').modal('show')
+} )
+
+
+
 
 const helicopter = {
     X: 3,
@@ -115,6 +121,7 @@ $('body').keydown((e)=> {
     }
 
 })
+
 const gameTimer = () => {
     gameTime = setInterval(()=>{
         seconds++;
@@ -134,17 +141,17 @@ const gameTimer = () => {
 
     
 }
-
+let speed = 1000
 const levelUp = () => {
     if(helicopter.lives > 0){
-        let int = 1000
+        speed -= 20;
         levelUpTimer = setInterval(()=>{
             if(seconds % 1 === 0){
                 let newObstacle = new Obstacle();
             }
             moveObsticles();
             detectCollision();
-        }, int - 20)
+        }, speed)
     }
 }
 
@@ -175,7 +182,6 @@ const gameOver = () => {
     // if you die before 30 seconds the 
     // levelUpTimer is not called so it
     // gets an error
-        $('.highscore').append(gameTime)
         clearInterval(gameTime);
         clearInterval(levelUpTimer)
         $('.playagain').show();
@@ -183,6 +189,12 @@ const gameOver = () => {
         $(`.square`).removeClass('helicopter');
         $('.game').append("<h1 class='gameOver'>Game Over</h1>");
 
+ }
+
+ const winner = () => {
+     if(minutes > 1){
+         $('.game').append('<h1 class=winner>You won....but you have also been playing this dumb game for 5 minutes...so really you lost</h1>');
+     }
  }
 
 

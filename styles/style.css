@@ -45,3 +45,9 @@ left: -400px;
 .gameOver {
     justify-content: center;
 }
+
+.instructions {
+    text-align: center;
+    margin-top: 2.5em;
+}
+
