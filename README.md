@@ -15,10 +15,12 @@ As a player I want to be able to click the mouse and have the helicopter move up
    - Make the game playable by clicking the mouse.
    - During game play the mouse will controle the up and down movements of a helicopter.
    - The helicopter will need to avoid moving obsticles.
-   - Obsticles will include the floor, celing and moving targets coming from the top and bottom. 
+   - Obsticles will include moving targets coming from the left. 
    - Make the game end if an obsticle is hit by the helicopter.
    - Make the game restart if the player want's to.
    - If the time that the player made it in the game is higer than the previous time update high score.
+            - slight pivot in MVP could not get high score to append and be able to refresh the page
+            - instead gave the helicopter 3 lives allowed it to move in all 
    
     Nice-to-haves
 - Make the speed of the game increase as time increases.

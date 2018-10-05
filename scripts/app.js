@@ -191,13 +191,8 @@ const gameOver = () => {
 
  }
 
- const winner = () => {
-     if(minutes > 1){
-         $('.game').append('<h1 class=winner>You won....but you have also been playing this dumb game for 5 minutes...so really you lost</h1>');
-     }
- }
-
 
 $('.playagain').on('click', () => {
     location.reload(true);
 })
+
